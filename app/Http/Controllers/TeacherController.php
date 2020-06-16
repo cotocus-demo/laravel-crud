@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Student;
+use App\Teacher;
 
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-         $student = Student::all()->toArray();
-        return view('student.index', compact('students'));
+         $teachers = Teacher::all()->toArray();
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -25,7 +25,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('student.create');
+        return view('teacher.create');
     }
 
     /**
@@ -40,13 +40,12 @@ class StudentController extends Controller
             'first_name'    =>  'required',
             'last_name'     =>  'required'
         ]);
-        $student = new Student([
+        $teacher = new Teacher([
             'first_name'    =>  $request->get('first_name'),
             'last_name'     =>  $request->get('last_name')
         ]);
-        $student->save();
-        return redirect()->route('student.create')->with('success', 'Data Added');
-    
+        $teacher->save();
+        return redirect()->route('teacher.create')->with('success', 'Data Added');
     }
 
     /**
@@ -68,8 +67,8 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-       $student = Student::find($id);
-        return view('student.edit', compact('student', 'id'));
+        $teacher = Teacher::find($id);
+        return view('teacher.edit', compact('teacher', 'id'));
     }
 
     /**
@@ -85,12 +84,11 @@ class StudentController extends Controller
             'first_name'    =>  'required',
             'last_name'     =>  'required'
         ]);
-        $student = Student::find($id);
-        $student->first_name = $request->get('first_name');
-        $student->last_name = $request->get('last_name');
-        $student->save();
-        return redirect()->route('student.index')->with('success', 'Data Updated');
- 
+        $teacher = Teacher::find($id);
+        $teacher->first_name = $request->get('first_name');
+        $teacher->last_name = $request->get('last_name');
+        $teacher->save();
+        return redirect()->route('teacher.index')->with('success', 'Data Updated');
     }
 
     /**
@@ -101,8 +99,8 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
-        $student = Student::find($id);
-        $student->delete();
-        return redirect()->route('student.index')->with('success', 'Data Deleted');
+       $teacher = Teacher::find($id);
+        $teacher->delete();
+        return redirect()->route('teacher.index')->with('success', 'Data Deleted');
     }
 }

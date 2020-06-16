@@ -19,4 +19,8 @@ Route::get('/', function () {
 
 Route::resource('student', 'StudentController');
 
+Route::get('/sendemail', 'SendEmailController@index');
+Route::post('/sendemail/send', 'SendEmailController@send');
+Route::resource('teacher', 'TeacherController');
+
 ?>
